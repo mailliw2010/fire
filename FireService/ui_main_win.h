@@ -17,7 +17,6 @@
 #include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 #include <qwebengineview.h>
@@ -42,15 +41,14 @@ public:
     QMenuBar *menuBar;
     QMenu *menuFile;
     QMenu *menuTest;
-    QToolBar *toolBar;
 
     void setupUi(QMainWindow *View)
     {
         if (View->objectName().isEmpty())
             View->setObjectName(QString::fromUtf8("View"));
-        View->resize(936, 462);
+        View->resize(1920, 1080);
         View->setMaximumSize(QSize(160000, 160000));
-        View->setBaseSize(QSize(1024, 800));
+        View->setBaseSize(QSize(1920, 1080));
         View->setStyleSheet(QString::fromUtf8("\n"
 "QMenuBar {\n"
 "	color:rgb(223,219,210);\n"
@@ -135,7 +133,7 @@ public:
         btnGo->setGeometry(QRect(750, 0, 41, 25));
         m_webView = new QWebEngineView(centralWidget);
         m_webView->setObjectName(QString::fromUtf8("m_webView"));
-        m_webView->setGeometry(QRect(0, 40, 931, 401));
+        m_webView->setGeometry(QRect(0, 40, 1920, 1080));
         m_webView->setMaximumSize(QSize(160000, 160000));
         m_webView->setSizeIncrement(QSize(10, 10));
         m_webView->setBaseSize(QSize(1024, 0));
@@ -147,15 +145,12 @@ public:
         m_webView->raise();
         menuBar = new QMenuBar(View);
         menuBar->setObjectName(QString::fromUtf8("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 936, 18));
+        menuBar->setGeometry(QRect(0, 0, 1920, 18));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QString::fromUtf8("menuFile"));
         menuTest = new QMenu(menuBar);
         menuTest->setObjectName(QString::fromUtf8("menuTest"));
         View->setMenuBar(menuBar);
-        toolBar = new QToolBar(View);
-        toolBar->setObjectName(QString::fromUtf8("toolBar"));
-        View->addToolBar(Qt::TopToolBarArea, toolBar);
 
         menuBar->addAction(menuFile->menuAction());
         menuBar->addAction(menuTest->menuAction());
@@ -186,7 +181,6 @@ public:
         btnGo->setText(QApplication::translate("View", "Go", nullptr));
         menuFile->setTitle(QApplication::translate("View", "Configure", nullptr));
         menuTest->setTitle(QApplication::translate("View", "Test", nullptr));
-        toolBar->setWindowTitle(QApplication::translate("View", "toolBar", nullptr));
     } // retranslateUi
 
 };

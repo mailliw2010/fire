@@ -88,7 +88,7 @@ public:
 #elif defined (__x86_64)  // x86 gcc
    // /home/forlinx/web/index.html   --old web
    // /home/forlinx/wwwroot/views/index.html  --new web
-    QString UrlName = "/home/forlinx/wwwroot/views/switch.html";
+    QString UrlName = "/home/wwwroot/views/switch.html";
 #else    // default is  _ARM_LINUX_    // arm-linux-gcc
     QString UrlName = "/home/forlinx/web/index.html";
 #endif

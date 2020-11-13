@@ -46,7 +46,7 @@ void outputMessage(QtMsgType type, const QMessageLogContext &context, const QStr
     }
 
     QTextStream text_stream(&file);
-    text_stream << message << "\r\n";
+    text_stream << message << "\n";
     file.flush();
     file.close();
     mutex.unlock();

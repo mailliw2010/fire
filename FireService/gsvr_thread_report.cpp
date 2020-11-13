@@ -109,7 +109,7 @@ QString ThreadMqttReport::DevDataToPayload(uint8_t devid, const ENUM_TopicType& 
            it.value()->IsOk = 0;
        }
        locker.unlock();
-       QThread::msleep(100);  // sleep 100ms, to let other thread comes in!
+       QThread::msleep(300);  // sleep 100ms, to let other thread comes in!
 
        it.value()->DataInfoHandle();
 
@@ -160,7 +160,7 @@ QString ThreadMqttReport::DevDataToPayload(uint8_t devid, const ENUM_TopicType& 
            it.value()->IsOk = 0;
        }
        locker.unlock();
-       QThread::msleep(100);  // sleep 100ms, to let other thread comes in!
+       QThread::msleep(300);  // sleep 100ms, to let other thread comes in!
 
 
        /**Put data to repayload**/
@@ -266,6 +266,7 @@ void ThreadMqttReport::ExecUpDevInfo()
     {
 
          /************ Analysis Data **************************/
+        qDebug() << "*******Dev:" << it.key();
          // for Info
          reInfo.rePayload = DevDataToPayload(it.key(), Info);//(QString Topic, QString ClientID, QString DataType, QString PayLoad)
          reInfo.reTopic = "Info";

@@ -53,7 +53,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -78,6 +78,9 @@
         <italic>false</italic>
         <bold>true</bold>
        </font>
+      </property>
+      <property name="editable">
+       <bool>true</bool>
       </property>
       <item>
        <property name="text">

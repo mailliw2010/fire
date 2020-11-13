@@ -59,7 +59,7 @@ infoModel::infoModel()
 infoModel::~infoModel()
 {
    delete currentData;
-   qDebug() << "deleting infoModel";
+   qDebug() << "deleting breakObj";
 
 
 }

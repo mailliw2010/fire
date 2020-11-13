@@ -6,6 +6,8 @@
 #include <QHBoxLayout>
 #include "globalFun.h"
 
+extern QMutex uart_mutex;
+
 View::View(QWidget* parent):
     QMainWindow(parent),
     ui(new Ui::View)
@@ -46,14 +48,16 @@ void View::ShowWindow()
 if(setting->para->debugmode)
 {
     qDebug() << "Entering Debug Mode...";
+    this->ui->menuBar->setVisible(true);
 
 }
 else
 {
-    this->setWindowFlags(Qt::FramelessWindowHint);    //hide window, max/min button  seems usless
+    qDebug() << "Entering FullScreen Mode...";
+    this->setWindowFlags(Qt::FramelessWindowHint);    //hide window, max/min button
 }
 
-    this->showMaximized();    // control this to show full screen!
+    this->showFullScreen();    // control this to show full screen!
     /********webengine***************/
     qDebug() << "Initial Web Engine...";
     QWidget *widget = new QWidget(this);
@@ -119,6 +123,7 @@ void View::keyPressEvent(QKeyEvent *event)
        if (event->key() == Qt::Key_C  &&  event->modifiers() == Qt::ControlModifier)    // quit Application
        {
 
+            QMutexLocker locker(&uart_mutex);
            qInfo() << "Quitting FireService Gracefully!\n";
            QApplication::quit();
        }

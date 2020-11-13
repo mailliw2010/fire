@@ -76,6 +76,7 @@ void ConfigWin::initialize()
     ui->editLog->setMaximumBlockCount(65500);  // set max count ;
   //  setFixedSize(1280,500);   //固定窗口大小
     this->ui->lineEditTopic->setText(_mqtt_topic::Topic_Head + "#");
+    this->ui->comboBox_portName->setEditable(true);
 
     connect(timer, SIGNAL(timeout()), this, SLOT(readMyCom()));
     timer->start(10);  //send emit timeout() every 10ms.

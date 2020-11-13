@@ -155,6 +155,7 @@ public:
         font1.setItalic(false);
         font1.setWeight(75);
         comboBox_portName->setFont(font1);
+        comboBox_portName->setEditable(true);
         label_2 = new QLabel(tab);
         label_2->setObjectName(QString::fromUtf8("label_2"));
         label_2->setGeometry(QRect(10, 40, 61, 21));
@@ -659,7 +660,7 @@ public:
 
         retranslateUi(ConfigWin);
 
-        tabWidget->setCurrentIndex(1);
+        tabWidget->setCurrentIndex(2);
         buttonConnect->setDefault(false);
         buttonConnect_local->setDefault(false);
         buttonUnsubscribe->setDefault(false);
