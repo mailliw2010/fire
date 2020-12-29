@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" autoUpload="Always" serverName="192.168.10.209 (d4c74c2d-d8df-460e-b981-50ace3bef8ba)" remoteFilesAllowedToDisappearOnAutoupload="false">
+    <serverData>
+      <paths name="192.168.10.209 (d4c74c2d-d8df-460e-b981-50ace3bef8ba)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/home/ar9331/FireService-basic" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-minsizerel-19216810209" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-19216810209" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release-19216810209" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug-19216810209" />
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-release-19216810209" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="Remote Host (ad9256d6-3637-4d2f-a4a7-7205d16194c4)">
+        <serverdata>
+          <mappings>
+            <mapping local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+    </serverData>
+    <option name="myAutoUpload" value="ALWAYS" />
+  </component>
+</project>

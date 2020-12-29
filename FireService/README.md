@@ -1,3 +1,84 @@
+#20201229
+
+std::string ThreadMqttListen::PayloadDataAnalysis
+在Read/SetBVal, Read/SetBEn 上加上锁；
+调整语法结构，改为switch语句； 
+
+
+分离出PayloadReadB(); 读取断路器value 和 enable;
+para添加Serial_Waite_Time 给modbus判断timeout；
+isKeyExist判断添加设备id;
+
+
+#20201228
+发现读取设备一段时间后会出现乱串，如控制设备25，的时候出现读取设备26的warn；
+原因：Warn 主题的 串口读没有加锁，现在加上。问题解决
+
+问题：电量一直为0。
+原因：进行小数运算时，需要把运算的数强制转为float。修改后，电量正常显示；
+所有进行小数运算的uint16_t运算数都强制转换为float;
+
+#20201225
+添加方法int gmodbus::ModbusWriteMultiRegister(int devid, int addr, int n, uint16_t* data);
+
+#20201224
+添加进程锁。
+gsvr_app_shmutex.c/h
+
+网关可以完美运行塑壳和断路器程序；
+
+#20201221
+修复了若干bug:
+1、para->FrameInfo->Timeout 的值是modbus时间时延，被二次覆盖了；修改；
+gsvr_app_config.cpp line307 注释//   para->FrameInfo.OverTime = get_json_val("mqtt_public","timeout").GetUint();
+2、控制开关后的UpdateSwitchState函数中，没有对ON和OFF是否执行成功做判断，已修改做判断；
+gsvr_thread_listen.cpp line799      if(it->second->currentData->openState == cmdtype)   // ON:0--ok; OFF:1--ok
+3、当设备ID不存在时，UpdateSwitchState直接返回，不对，应该是continue；已修改；
+gsvr_thread_listen.cpp line789     continue;   //return  if devid does not exists!   nono, change to continue!
+
+目前可以正常使用Info和Cmd！
+
+
+另外 configure  和  fire_service/fire_daemon 有些问题，修改过来了；
+
+
+1、split_by_ch() 函数修改，判断最后的字符是否为"|", 若为"|",则需要push_back一个空字符串；否则在payload最后的ERR_INFO为空
+的情况下， string.size() 会少一个数，导致格式错误！
+2、完成升级功能，ThreadMqttListen::ExecUpFileFunc() 进行若干修正，基本上也是因为以上一点的问题引发的格式错误！
+3、发现UPOK 和UPOk都兼容。服务端也许修改了；
+
+
+#20201218
+之前开机自启动后由于执行路径在根目录，无法导入配置文件，也无法打开日志路径。
+所以在fire_service脚本中的start()添加 cd ${FIREROOT}, 于是成功！
+
+#20201216
+这个版本可以完美运行在网关，添加了json配置，还做了一下优化
+1、优化程序路径；
+2、改在ar9331用户上编译和运行。不需要使用root;  文件路径在/home/ar9331中。 环境变量也是针对用户的，不在/etc/profile中设置，而是在~/.bash_profile中设置。
+3、CMakeList.txt 使用相对路径。这样可以拷贝在任意路径下编译。
+4、去掉了uuid，参考srs源码，结合srandom 和random函数，生成了随机数。 发现去掉uuid之后，fire_service 大小从7M降低至只有600K,
+使用strip之后只剩下500K；
+
+
+结构：
+进程：
+${FIREROOT}/fire_service	// 二进制文件
+${FIREROOT}/fire_daemon.sh  // 脚本daemon 文件
+
+${FIREROOT}/etc/init.d/fire_service	// 脚本服务
+${FIREROOT}/etc/init.d/fire_daemon  // 脚本服务
+
+
+
+
+
+
+#20201215
+这个版本可以完美运行在网关，但是还没有添加json配置；
+
+
+
 #20200910
 
 添加完mqtt服务功能

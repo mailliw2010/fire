@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CLionExternalBuildManager">
+    <target id="8a755970-33a7-4c19-9888-4fb34deab55b" name="embedded-target" defaultType="TOOL">
+      <configuration id="830301e7-a61e-4f49-b5c1-0e0bd23244c2" name="embedded-target" toolchainName="192.168.10.209" />
+    </target>
+  </component>
+</project>

@@ -1,0 +1,18 @@
+#!/bin/sh /etc/rc.common
+
+START=200
+start() {
+source /app/fire/configure    # there must be this!
+${FIREROOT}/fire_daemon.sh &
+}
+
+stop() {
+killall fire_daemon.sh
+}
+
+restart() {
+killall fire_daemon.sh
+sleep 5
+${FIREROOT}/fire_daemon.sh &
+}
+

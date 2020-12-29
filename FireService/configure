@@ -1,0 +1,46 @@
+#!/bin/sh
+# important!
+# do as follow:
+# 1. copy fire.tar.gz to directory in your machine.
+#  >>
+# 2. tar fire.tar.gz in the current directory.
+#  >> tar xvf fire.tar.gz
+# 3. remove fire.tar.gz
+#  >> rm fire.tar.gz
+# 4. in the current directory, run configure file
+#  >> source configure
+# 5. reboot the machine
+#  >> reboot
+# when reboot, type
+#  >> ps w|grep fire
+# you need to see the service: xxx/fire/fire_service
+
+# set environment for current shell globally, use source configure , or . configure
+
+export FIREROOT=/app/fire
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:${FIREROOT}/lib
+export C_INCLUDE_PATH=$C_INCLUDE_PATH:${FIREROOT}/include
+export CPLUS_INCLUDE_PATH=$CPLUS_INCLUDE_PATH:${FIREROOT}/include
+
+# set chmod for fire_service and fire_daemon.sh
+chmod +x ${FIREROOT}/fire_service
+chmod +x ${FIREROOT}/fire_daemon.sh
+
+
+# set fire_start service...
+cp ${FIREROOT}/etc/init.d/fire_service /etc/init.d/fire_service
+chmod +x /etc/init.d/fire_service
+echo "set auto run service of fire_service"
+if [ ! -e "/etc/rc.d/S200fire_service" ]
+then
+        /etc/init.d/fire_service enable
+fi
+# set fire_daemon service...
+cp ${FIREROOT}/etc/init.d/fire_daemon /etc/init.d/fire_daemon
+chmod +x /etc/init.d/fire_daemon
+echo "set auto run service of fire_daemon"
+if [ ! -e "/etc/rc.d/S200fire_daemon" ]
+then
+        /etc/init.d/fire_daemon enable
+fi
+echo "done!"
